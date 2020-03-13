@@ -23,6 +23,6 @@ const checkUser = (name, pass) => {
 
 //Test data
 let name = "Ifeoluwa"
-let password = "12345"
+let password = "1234534"
 
 checkUser(name, password)
