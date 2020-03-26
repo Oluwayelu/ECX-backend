@@ -10,9 +10,9 @@ Created on Thur Mar 26 12:45:36pm 2020
 
 */
 
-const validate = (value, valueType) => {
+const errorChecker = (value, valueType) => {
   typeof(value) !== valueType ? console.log("Error") : console.log("No error")
 }
 
 //test
-validate("ECX", "string")
+errorChecker("ECX", "string")
