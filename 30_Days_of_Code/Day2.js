@@ -10,9 +10,10 @@ Created on Thur Mar 26 12:45:36pm 2020
 
 */
 
-const errorChecker = (value, valueType) => {
-  typeof(value) !== valueType ? console.log("Error") : console.log("No error")
+const errorCheck = (value) => {
+   return value instanceof Error || toString.call(value) === '[object Error]';
 }
 
 //test
-errorChecker("ECX", "string")
+console.log(errorCheck(new Error("ECX")))
+console.log(errorCheck("ECX"))
