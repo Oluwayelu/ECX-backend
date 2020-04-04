@@ -63,4 +63,4 @@ const birthDays = dateOfBirth =>{
 
 //test
 console.log(birthDays("19-04-2000")) //15
-console.log(birthDays("19/04/2000")) //Incorrect
+console.log(birthDays("19/04/2000")) //Incorrect date format, use dd-mm-yyyy
