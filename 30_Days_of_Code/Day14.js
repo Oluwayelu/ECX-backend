@@ -1,7 +1,9 @@
 /*
 Day 14 of 30 Days of Code
 
-Write a program to check from two given numbers, whether one is positive and another one is negative
+Using ExpressJs or the native Http module, write a server that takes in an
+array of words from a POST request and returns only the words that are
+palindromes as a response from a GET request.
 
 Created on Tue Apr 7 11:52:33am 2020
 
