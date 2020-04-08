@@ -1,5 +1,5 @@
 /*
-Day 1 of 30 Days of Code
+Day 0 of 30 Days of Code
 
 Write a program to display the current day and time in the following format.
 Sample Output: 
@@ -9,7 +9,7 @@ Current time is: 10PM:30:38
 
 Created on Tue Mar 24 04:45:20 2020
 
-@author: Oluwayeu Ifeoluwa
+@author: Oluwayelu Ifeoluwa
 */
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 let hours 
