@@ -1,7 +1,11 @@
 /*
 Day 16 of 30 Days of Code
 
-Write a program to check from two given numbers, whether one is positive and another one is negative
+Task: Using ExpressJs or the native Http module, write a server that takes in username, email
+      and password from a SIGNUP route to create a user, and has a LOGIN route to
+      authenticate the user using the password and the email or username. Enjoy :-)
+      >> Remember to encrypt and compare the password with bcrypt but don’t return it in any
+      responses...
 
 Created on Thur Apr 9 10:48:33pm 2020
 
