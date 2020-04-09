@@ -44,7 +44,7 @@ app.post('/signup', (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(user.password, salt, (err, hash) => {
                     user.password = hash
-                    res.status(200).json({ success: true, msg: 'User registered', user })
+                    res.status(200).json({ success: true, msg: 'User registered' })
                 })
             })
         }
