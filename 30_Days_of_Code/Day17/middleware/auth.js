@@ -5,7 +5,7 @@ function auth(req, res, next){
     const token = req.header('Authorization').split(" ")[1]
 
     //Check for token
-    if(!token) return res.status(401).json({ msg: 'No token, authorization denied' })
+    if(!token) return res.status(401).json({ success: false, msg: 'No token, authorization denied' })
 
     try {
         //Verify token
@@ -14,7 +14,7 @@ function auth(req, res, next){
         req.user = decoded
         next();
     } catch(e) {
-        res.status(400).json({ msg: 'Token is not valid' })
+        res.status(400).json({ success: false, msg: 'Token is not valid' })
     }
 }
 

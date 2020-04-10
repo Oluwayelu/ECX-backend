@@ -1,3 +1,13 @@
+/*
+Day 17 of 30 Days of Code
+
+Write a program to check from two given numbers, whether one is positive and another one is negative
+
+Created on Fri Apr 10 7:36:27pm 2020
+
+@author: Oluwayelu Ifeoluwa
+*/
+
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -12,6 +22,7 @@ const port = process.env.PORT || 8000
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+//user database
 let userDB = []
 
 // @route   POST /signup
@@ -59,8 +70,9 @@ app.post('/login', (req, res) => {
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if(!isMatch) return res.status(400).json({ success: false, msg: 'Invalid credentials' })
 
+                const payload = { email: user.email }
                 jwt.sign(
-                    user,
+                    payload,
                     jwtSecret,
                     { expiresIn: 3600 },
                     (err, token) => {
@@ -81,13 +93,18 @@ app.post('/login', (req, res) => {
 
 
 // @route   GET /getuser
-// @desc    Get User
+// @desc    Get User details
 // @access  Private
 app.get('/getuser', auth, (req, res) => {
     const { email } = req.body
 
-    if(email !== req.user.email) return res.status(400).json({ success: false, msg: 'Email does not exist' })
-    res.status(200).json({ email: req.user.email, date: req.user.date, time: req.user.time })
+    if(email !== req.user.email) return res.status(400).json({ success: false, msg: 'Email is not tokenized' })
+    
+    userDB.map(user => {
+        if(req.user.email !== user.email) return res.status(400).json({ success: false, msg: 'tokenized email does not exist' })
+        res.status(200).json({ email: user.email, date: user.date, time: user.time })
+    })
+    
 })
 
 app.listen(port, () => {
