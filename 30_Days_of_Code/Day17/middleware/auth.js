@@ -2,8 +2,12 @@ const jwt = require('jsonwebtoken')
 const jwtSecret = require('../config/config').jwtSecret
 
 function auth(req, res, next){
-    const token = req.header('Authorization').split(" ")[1]
+    const header = req.header('Authorization').split(" ")
 
+    //Check for Bearer prefix
+    if(header[0] !== "Bearer") return res.status(400).json({ success: false, msg: 'Token does not include Bearer prefix' })
+
+    const token = header[1]
     //Check for token
     if(!token) return res.status(401).json({ success: false, msg: 'No token, authorization denied' })
 
