@@ -1,7 +1,21 @@
 /*
 Day 17 of 30 Days of Code
 
-Write a program to check from two given numbers, whether one is positive and another one is negative
+Task:
+   Using ExpressJs or the native Http module, write a server that takes in username, email
+   and password from a SIGNUP route to create a user, and has a LOGIN route to
+   authenticate the user using the password and the ​email​ or ​username​.
+
+   As a step farther, reimplement the signup route to be able save the time and date the
+   user signed up and have that data ready on a protected ‘’getuser” route. The “getuser”
+   route will take in the user’s email.
+
+   On a user’s authenticated login through the “login”​, return a session token (tokenize the
+   email) as the response to make sure only an authenticated user with that token can
+   access the “getuser” route; this token will be sent with the “getuser” request in the
+   request header as the value of the “​Authorization​” key; it will have a “Bearer” prefix.
+   The token will be verified on each “getuser” request to be sure the session token is valid
+   and has not expired.
 
 Created on Fri Apr 10 7:36:27pm 2020
 
