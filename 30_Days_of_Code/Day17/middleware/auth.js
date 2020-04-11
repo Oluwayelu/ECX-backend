@@ -4,7 +4,7 @@ const jwtSecret = require('../config/config').jwtSecret
 function auth(req, res, next){
     const header = req.header('Authorization').split(" ")
 
-    //Check for bearer prefix
+    //Check for Bearer prefix
     if(header[0] !== "Bearer") return res.status(400).json({ success: false, msg: 'Token does not include Bearer prefix'})
 
     const token = header[1]
