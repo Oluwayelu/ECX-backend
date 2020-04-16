@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
+const fs = require('fs')
 const jwt = require('jsonwebtoken')
 
 const auth = require('../../middleware/auth')
@@ -84,21 +85,6 @@ router.post('/login', (req, res) => {
         .catch(() => res.status(400).json({ success: false, msg: 'Invalid credentials' }))
 })
 
-// @route   GET /getusers
-// @desc    Get  all Users detail
-// @access  Public
-router.get('/getusers', (req, res) => {
-    
-    User.find({}, { password: 0 })
-        .then(users => {
-            if(!users) return res.status(400).json({ success: false, msg: 'No user' })
-            
-            res.status(200).json({ success: true, users })
-        })
-        .catch(() => res.status(400).json({ success: false, msg: 'Could not find users' }))
-})
-
-
 // @route   GET /getuser/:id
 // @desc    Get User details
 // @access  Private
@@ -155,6 +141,23 @@ router.delete('/deleteuser/:id', auth, (req, res) => {
             res.status(200).json({ success: true, msg: 'user account has been deleted' })
         })
         .catch(() => res.status(400).json({ success: false, msg: 'Could not delete user'}))
+})
+
+// @route   GET /logs
+// @desc    Get logs of request made to the server
+// @access  Public
+router.get('/logs', (req, res) => {
+    var readStream = fs.createReadStream('logs', 'utf8')
+
+    let data = ''
+
+    readStream.on('data', (chunk) => {
+        data += chunk
+        console.log(chunk)
+    }).on('end', () => {
+    
+        res.status(200).send(data)
+    })
 })
 
 module.exports = router

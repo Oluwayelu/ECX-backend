@@ -63,10 +63,11 @@ router.post('/login', (req, res) => {
                         if(err) return res.status(400).json({success: false, msg: 'Error occured while creating a token' })
                          
                         const updateUser = {
-                            lastLogin: new Date()
+                            lastLogin: new Date(new Date().getMilliseconds())
                         }
+            
                         User.findOneAndUpdate(
-                            { email: user.email }, 
+                            { email }, 
                             updateUser, 
                             { new: true})
                             .then(user => {
@@ -84,21 +85,6 @@ router.post('/login', (req, res) => {
         .catch(() => res.status(400).json({ success: false, msg: 'Invalid credentials' }))
 })
 
-// @route   GET /getusers
-// @desc    Get  all Users detail
-// @access  Public
-router.get('/getusers', (req, res) => {
-    
-    User.find({}, { password: 0 })
-        .then(users => {
-            if(!users) return res.status(400).json({ success: false, msg: 'No user' })
-            
-            res.status(200).json({ success: true, users })
-        })
-        .catch(() => res.status(400).json({ success: false, msg: 'Could not find users' }))
-})
-
-
 // @route   GET /getuser/:id
 // @desc    Get User details
 // @access  Private
@@ -108,15 +94,23 @@ router.get('/getuser/:id', auth, (req, res) => {
     User.findOne({ _id: id }, { password: 0 })
         .then(user => {
             if(req.user.email !== user.email) return res.status(400).json({ success: false, msg: 'user is not authorized' })
-            res.status(200).json({
-                _id: user._id,
-                email: user.email,
-                names: user.names,
-                occupation: user.occupation,
-                lastLogin: dateTime(user.lastLogin)
-             })
+            res.status(200).json({ user: new Date(user.lastLogin).toLocaleString(), da: dateTime(1521065710000).today })
         })
         .catch(() => res.status(400).json({ success: false, msg: 'User does not exist' }))
+})
+
+// @route   GET /getusers
+// @desc    Get  all Users detail
+// @access  Public
+router.get('/getusers', (req, res) => {
+    
+    User.find({}, { password: 0 })
+        .then(users => {
+            if(!users) return res.status(400).json({ success: false, msg: 'No user' })
+            
+            res.status(200).json(users)
+        })
+        .catch(() => res.status(400).json({ success: false, msg: 'Could not find users' }))
 })
 
 // @route   PUT /updateuser/:id
@@ -130,11 +124,11 @@ router.put('/updateuser/:id', auth, (req, res) => {
             if(user.email !== req.user.email) return res.status(400).json({ success: false, msg: 'user is not authorized' })
 
             User.findOneAndUpdate(
-                { _id: id }, 
+                { email }, 
                 req.body, 
                 { new: true})
                 .then(user => {
-                    res.status(200).json({ success: true, msg: 'User updated' })
+                    res.status(200).json({ success: true, msg: 'User updated', user })
                 })
                 .catch(() => res.status(400).json({ success: false, msg: 'Could not update user'}))
         })
