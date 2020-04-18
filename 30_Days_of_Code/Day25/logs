@@ -1,0 +1,6 @@
+GET /asd 304 7.313 ms
+GET /asd 304 2.079 ms
+GET /asdf 404 3.805 ms
+GET /asd 304 0.582 ms
+GET /asd 304 0.831 ms
+GET /asd 304 0.684 ms
